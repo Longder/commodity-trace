@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!--引入统一头-->
+<head th:include="import/head :: head"></head>
+<body>
+<h1>商品详情</h1>
+<form>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">名称<span
+                class="text-danger">*</span></label>
+        <div class="col-sm-10">
+            <span th:text="${commodity.name}"></span>
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">商品图片<span
+                class="text-danger">*</span></label>
+        <div class="col-sm-10">
+            <img th:src="${commodity.image}" class="img-responsive"
+                 style="width:300px;">
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">经销商<span
+                class="text-danger">*</span></label>
+        <div class="col-sm-10">
+            <span th:text="${commodity.dealer}"></span>
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">生产地<span
+                class="text-danger">*</span></label>
+        <div class="col-sm-10">
+            <span th:text="${commodity.factory}"></span>
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">单价<span
+                class="text-danger">*</span></label>
+        <div class="col-sm-10">
+            <span th:text="${commodity.unitPrice}"></span>
+        </div>
+    </div>
+</form>
+</body>
+<!--引入统一JS-->
+<script th:replace="import/script :: script"></script>
+</html>

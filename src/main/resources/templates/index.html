@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!--引入统一头-->
+<head th:include="import/head :: head"></head>
+<body class="gray-bg top-navigation">
+<div id="wrapper">
+    <div class="gray-bg" id="page-wrapper" style="min-height:1000px;">
+        <div class="row border-bottom white-bg">
+            <nav class="navbar navbar-static-top" role="navigation">
+                <div class="navbar-header">
+                    <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed"
+                            data-target="#navbar"
+                            data-toggle="collapse" type="button">
+                        <i class="fa fa-reorder"></i>
+                    </button>
+                    <a class="navbar-brand" href="#">商品溯源</a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="hidden-xs">
+                        <a aria-expanded="false" class="right-sidebar-toggle" target="_blank" th:href="@{/admin/index}">
+                            <i class="fa fa-bank"></i> 网站后台
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="container">
+                <h2>所有商品</h2>
+                <div class="row">
+                    <div class="col-sm-4" th:each="commodity:${commodityList}">
+                        <div class="contact-box">
+                            <a>
+                                <div class="col-sm-7">
+                                    <div class="text-center">
+                                        <img alt="image" style="width: 160px;height:160px;" th:src="${commodity.image}">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="col-sm-5">
+                                <a href="#">
+                                    <h3><strong th:text="${commodity.name}"></strong></h3>
+                                </a>
+                                <p>单价：<span class="text-danger" th:text="${commodity.unitPrice}"></span></p>
+                                <a class="btn btn-success btn-warning"
+                                   th:onclick="'javascript:showQrCode(\''+${commodity.id}+'\')'">
+                                    <i class="fa fa-calendar"></i> 商品二维码
+                                </a>
+                                <input th:id="'qrCode-'+${commodity.id}" type="hidden" th:value="${commodity.qrCode}"/>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="qr-code-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">商品二维码</h4>
+            </div>
+            <div class="modal-body" >
+                <img alt="image" style="width: 500px;height:500px;margin: 0 auto" src="" id="qr-code-img">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--引入统一JS-->
+<script th:replace="import/script :: script"></script>
+<script>
+    function showQrCode(id){
+        console.log($('#qrCode-'+id).val());
+        $("#qr-code-img").attr("src",$('#qrCode-'+id).val());
+        $("#qr-code-modal").modal('show');
+    }
+</script>
+</body>
+
+</html>
